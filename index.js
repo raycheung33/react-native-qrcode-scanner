@@ -222,6 +222,10 @@ export default class QRCodeScanner extends Component {
   }
 
   _handleBarCodeRead(e) {
+    if (!(/^.{36}\s.+$/.test(e.data))) {
+      // pattern not match so ignore it
+      return;
+    }
     if (!this.state.scanning && !this.state.disableVibrationByUser) {
       if (this.props.vibrate) {
         Vibration.vibrate();
